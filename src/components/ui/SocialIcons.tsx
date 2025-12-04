@@ -3,9 +3,6 @@ import { portfolioData } from "@/data/portfolio";
 import {
   TbBrandGithub,
   TbBrandLinkedin,
-  TbBrandX,
-  TbBrandInstagram,
-  TbBrandMedium,
   TbMail,
 } from "react-icons/tb";
 
@@ -15,10 +12,6 @@ const iconMap: Record<
 > = {
   Github: TbBrandGithub,
   Linkedin: TbBrandLinkedin,
-  Twitter: TbBrandX,
-  X: TbBrandX,
-  Instagram: TbBrandInstagram,
-  Medium: TbBrandMedium,
   Mail: TbMail,
 };
 

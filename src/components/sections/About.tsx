@@ -24,8 +24,8 @@ export const HeroSection = React.memo(function HeroSection() {
       className="flex flex-col justify-start relative pt-12 md:pt-16 pb-10"
     >
       {/* Background Gradients */}
-      <div className="absolute -top-20 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl -z-10 opacity-50" />
-      <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-secondary/20 rounded-full blur-3xl -z-10 opacity-50" />
+      <div className="absolute -top-20 -left-20 w-96 h-96 bg-red-600/20 rounded-full blur-3xl -z-10 opacity-50" />
+      <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-red-800/20 rounded-full blur-3xl -z-10 opacity-50" />
 
       <div className="container mx-auto px-4 xl:px-24 z-10">
         <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
@@ -87,7 +87,7 @@ export const HeroSection = React.memo(function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 to-secondary/40 rounded-[2rem] rotate-6 scale-105 blur-2xl opacity-40 group-hover:opacity-60 transition-all duration-500" />
 
               {/* Second Layer (Rotated Card) */}
-              <div className="absolute inset-0 bg-slate-800/80 backdrop-blur-sm rounded-[2rem] rotate-3 border border-white/10 group-hover:rotate-6 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-red-900/30 backdrop-blur-sm rounded-[2rem] rotate-3 border border-primary/20 group-hover:rotate-6 transition-transform duration-500" />
 
               {/* Main Image Container with Gradient Border */}
               <div className="relative w-full h-full rounded-[2rem] p-[2px] bg-gradient-to-br from-primary to-secondary -rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-2xl">

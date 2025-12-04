@@ -16,8 +16,15 @@ export const ExperienceSection = React.memo(function ExperienceSection() {
         center={false}
       />
 
-      <div className="relative border-l-2 border-slate-800 ml-4 pl-8 space-y-12">
-        {portfolioData.experience.map((exp, index) => (
+      {portfolioData.experience.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-slate-400 text-lg">
+            Currently looking for opportunities to contribute and grow.
+          </p>
+        </div>
+      ) : (
+        <div className="relative border-l-2 border-slate-800 ml-4 pl-8 space-y-12">
+          {portfolioData.experience.map((exp, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, x: -20 }}
@@ -48,7 +55,8 @@ export const ExperienceSection = React.memo(function ExperienceSection() {
             </ul>
           </motion.div>
         ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 });

@@ -87,13 +87,13 @@ export function Navbar() {
           : "bg-transparent"
       )}
     >
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-6 py-4 flex items-center justify-center md:justify-between">
         <Link
           href="#about"
           onClick={(e) => handleNavClick(e, "#about")}
-          className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+          className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
         >
-          Vipul<span className="text-white"> Jha</span>.
+          Kenney<span className="text-white"> Tran</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -106,7 +106,7 @@ export function Navbar() {
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={cn(
-                  "text-sm font-medium transition-colors relative",
+                  "text-base font-medium transition-colors relative",
                   isActive
                     ? "text-primary"
                     : "text-slate-300 hover:text-primary"

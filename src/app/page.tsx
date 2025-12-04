@@ -1,10 +1,13 @@
-import { HeroSection } from "@/components/sections/Hero";
+import { HeroSection } from "@/components/sections/About";
 import { TechStack } from "@/components/sections/TechStack";
 import { ExperienceSection } from "@/components/sections/Experience";
 import { ProjectsSection } from "@/components/sections/Projects";
 import { ContactSection } from "@/components/sections/Contact";
+import { portfolioData } from "@/data/portfolio";
 
 export default function Home() {
+  const hasExperience = portfolioData.experience.length > 0;
+
   return (
     <div className="flex flex-col gap-0">
       <HeroSection />

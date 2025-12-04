@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  /* Deep rich dark tones - Slate 950 base */
-  --background: #020617;
+  /* Deep black background */
+  --background: #000000;
   --foreground: #f8fafc;
 
-  /* Modern Professional Palette - Teal & Sky */
-  --primary: #2dd4bf;
-  /* Teal 400 */
-  --secondary: #0ea5e9;
-  /* Sky 500 */
-  --accent: #f43f5e;
-  /* Rose 500 */
+  /* Crimson & Red Palette */
+  --primary: #dc143c;
+  /* Crimson */
+  --secondary: #8b0000;
+  /* Dark Red */
+  --accent: #ff4444;
+  /* Bright Red */
 
   scroll-behavior: smooth;
 }
@@ -45,20 +45,32 @@ body {
   scroll-margin-top: 80px;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Webkit (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 4px;
+  background: #dc143c;
+  border-radius: 5px;
+  border: 2px solid #000000;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #ff4444;
+}
+
+/* Custom Scrollbar - Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #dc143c #000000;
+}
+
+/* Smooth scrolling for all elements */
+* {
+  scroll-behavior: smooth;
 }

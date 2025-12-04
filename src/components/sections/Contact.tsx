@@ -116,7 +116,7 @@ export const ContactSection = React.memo(function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-500">Based in</p>
-                  <p className="font-medium">Delhi, India</p>
+                  <p className="font-medium">Boston, MA</p>
                 </div>
               </div>
             </div>
