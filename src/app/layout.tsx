@@ -22,8 +22,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  // TODO: Update with actual domain when deployed
-  metadataBase: new URL("http://localhost:3000"),
+  metadataBase: new URL("https://personal-website-two-pi-35.vercel.app"),
   title: {
     template: `%s | ${portfolioData.name}`,
     default: `${portfolioData.name} - ${portfolioData.role}`,

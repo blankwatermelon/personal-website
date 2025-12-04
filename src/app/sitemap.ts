@@ -1,8 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // TODO: Update with actual domain when deployed
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://personal-website-two-pi-35.vercel.app";
   const currentDate = new Date();
 
   return [

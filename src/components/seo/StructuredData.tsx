@@ -9,7 +9,7 @@ export function StructuredData() {
     name: portfolioData.name,
     jobTitle: portfolioData.role,
     description: portfolioData.about,
-    url: "http://localhost:3000",
+    url: "https://personal-website-two-pi-35.vercel.app",
     sameAs: portfolioData.social
       .filter((s) => s.platform !== "Email")
       .map((s) => s.url),
@@ -30,7 +30,7 @@ export function StructuredData() {
     "@type": "WebSite",
     name: `${portfolioData.name} Portfolio`,
     description: portfolioData.about,
-    url: "http://localhost:3000",
+    url: "https://personal-website-two-pi-35.vercel.app",
     author: {
       "@type": "Person",
       name: portfolioData.name,
