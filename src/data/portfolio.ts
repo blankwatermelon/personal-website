@@ -47,7 +47,7 @@ export const portfolioData: PortfolioData = {
   name: "Kenney Tran",
   role: "CS @ Boston University",
   about:
-    "CS student at Boston University learning by shipping. Built AI-powered developer tools and real-time web apps used by actual users. I enjoy automating repetitive tasks and building solutions that make life easier. Always focused on writing clean, scalable code that solves real problems.",
+    "CS student at Boston University learning by shipping. Built AI-powered developer tools and real-time web apps used by actual users. I enjoy automating repetitive tasks and building solutions that make my life easier. Always focused on writing clean, scalable code that solves real problems!",
   profileImage: "/images/OSHAWOTT_CRY.png",
   blogUrl: "",
   social: [
