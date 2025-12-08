@@ -34,7 +34,7 @@ export interface PortfolioData {
   blogUrl?: string;
   social: SocialLink[];
   skills: {
-    mobile: string[];
+    languages: string[];
     libraries: string[];
     web: string[];
     tools: string[];
@@ -68,7 +68,7 @@ export const portfolioData: PortfolioData = {
     },
   ],
   skills: {
-    mobile: [
+    languages: [
       "HTML",
       "CSS",
       "JavaScript",

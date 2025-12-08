@@ -8,11 +8,44 @@ import Link from "next/link";
 import Image from "next/image";
 import { SocialIcons } from "@/components/ui/SocialIcons";
 
-export const HeroSection = React.memo(function HeroSection() {
+interface HeroSectionProps {
+  onAnimationComplete?: () => void;
+}
+
+export const HeroSection = React.memo(function HeroSection({ onAnimationComplete }: HeroSectionProps) {
   const [displayedName, setDisplayedName] = useState("");
   const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [spotlightRadius, setSpotlightRadius] = useState(0);
+  const hasAnimatedRef = React.useRef(false);
 
   useEffect(() => {
+    // Spotlight reveal animation - starts immediately
+    if (typeof window === 'undefined') return;
+    if (hasAnimatedRef.current) return; // Don't run if already animated
+    
+    const maxRadius = Math.max(window.innerWidth, window.innerHeight) * 1.2;
+    const duration = 1500; // 1.5 seconds
+    const startTime = Date.now();
+
+    const animateSpotlight = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      
+      setSpotlightRadius(easeProgress * maxRadius);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateSpotlight);
+      }
+    };
+
+    animateSpotlight();
+  }, []);
+
+  useEffect(() => {
+    if (hasAnimatedRef.current) return;
+    hasAnimatedRef.current = true;
+
     let currentIndex = 0;
     const typingInterval = setInterval(() => {
       if (currentIndex <= portfolioData.name.length) {
@@ -21,11 +54,16 @@ export const HeroSection = React.memo(function HeroSection() {
       } else {
         setIsTypingComplete(true);
         clearInterval(typingInterval);
+        
+        // Call onAnimationComplete after a delay to let the cascade finish
+        setTimeout(() => {
+          onAnimationComplete?.();
+        }, 1500); // Wait for bio and buttons to appear
       }
     }, 100);
 
     return () => clearInterval(typingInterval);
-  }, []);
+  }, [onAnimationComplete]);
 
   const handleScrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -41,6 +79,16 @@ export const HeroSection = React.memo(function HeroSection() {
       id="about"
       className="flex flex-col justify-start relative pt-12 md:pt-16 pb-10"
     >
+      {/* Spotlight Reveal Overlay */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-50"
+        style={{
+          background: `radial-gradient(circle at 50% 40%, transparent ${spotlightRadius}px, rgba(0, 0, 0, 1) ${spotlightRadius + 50}px)`,
+          opacity: typeof window !== 'undefined' && spotlightRadius >= window.innerWidth * 1.2 ? 0 : 1,
+          transition: 'opacity 0.5s ease-out',
+        }}
+      />
+      
       {/* Background Gradients */}
       <div className="absolute -top-20 -left-20 w-96 h-96 bg-red-600/20 rounded-full blur-3xl -z-10 opacity-50" />
       <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-red-800/20 rounded-full blur-3xl -z-10 opacity-50" />
@@ -49,9 +97,9 @@ export const HeroSection = React.memo(function HeroSection() {
         <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
           {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
             className="flex-1 text-center lg:text-left"
           >
             <motion.p 
@@ -119,8 +167,8 @@ export const HeroSection = React.memo(function HeroSection() {
           {/* Right Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            animate={{ opacity: isTypingComplete ? 1 : 0, scale: isTypingComplete ? 1 : 0.95 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             className="flex-1 flex justify-center lg:justify-end"
           >
             <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 group perspective-1000">
