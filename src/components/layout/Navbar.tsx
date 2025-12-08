@@ -32,34 +32,42 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "-50% 0px -50% 0px",
-      threshold: 0,
-    };
-
-    const observerCallback: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+    const handleScroll = () => {
+      const sections = navLinks.map((link) => {
+        const id = link.href.substring(1);
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return {
+            id,
+            top: rect.top,
+            bottom: rect.bottom,
+          };
         }
+        return null;
+      }).filter(Boolean);
+
+      // Find the section that's most visible in the viewport
+      const current = sections.find((section) => {
+        if (!section) return false;
+        return section.top <= 100 && section.bottom > 100;
       });
+
+      if (current) {
+        setActiveSection(current.id);
+      }
     };
 
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions
-    );
+    // Delay initial check to ensure sections are rendered
+    const timeoutId = setTimeout(() => {
+      handleScroll();
+      window.addEventListener("scroll", handleScroll);
+    }, 2000);
 
-    navLinks.forEach((link) => {
-      const sectionId = link.href.substring(1);
-      const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => observer.disconnect();
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const handleNavClick = (

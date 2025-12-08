@@ -62,7 +62,7 @@ export const ContactSection = React.memo(function ContactSection() {
   );
 
   return (
-    <section id="contact" className="pt-10 pb-20 bg-slate-950/50">
+    <section id="contact" className="pt-10 pb-20 bg-black">
       <div className="container mx-auto px-4 xl:px-24">
         <SectionHeading
           title="Get In Touch"
@@ -147,7 +147,7 @@ export const ContactSection = React.memo(function ContactSection() {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="w-full h-14 bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-slate-100 focus:outline-none focus:border-primary transition-colors"
+                    className="w-full h-14 bg-black border border-slate-800 rounded-lg px-4 py-2 text-slate-100 focus:outline-none focus:border-primary transition-colors"
                     placeholder="John Doe"
                   />
                 </div>
@@ -167,7 +167,7 @@ export const ContactSection = React.memo(function ContactSection() {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="w-full h-14 bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-slate-100 focus:outline-none focus:border-primary transition-colors"
+                    className="w-full h-14 bg-black border border-slate-800 rounded-lg px-4 py-2 text-slate-100 focus:outline-none focus:border-primary transition-colors"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -188,7 +188,7 @@ export const ContactSection = React.memo(function ContactSection() {
                     setFormData({ ...formData, message: e.target.value })
                   }
                   rows={4}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-slate-100 focus:outline-none focus:border-primary transition-colors resize-none"
+                  className="w-full bg-black border border-slate-800 rounded-lg px-4 py-3 text-slate-100 focus:outline-none focus:border-primary transition-colors resize-none"
                   placeholder="Tell me about your project..."
                 />
               </div>

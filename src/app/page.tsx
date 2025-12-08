@@ -20,6 +20,7 @@ export default function Home() {
       {showSections && (
         <>
           <motion.section 
+            id="experience"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -27,10 +28,10 @@ export default function Home() {
           >
             <div className="container mx-auto px-4 xl:px-24">
               <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
-                <div id="experience" className="flex-1">
+                <div className="flex-1">
                   <ExperienceSection />
                 </div>
-                <div id="skills" className="flex-1">
+                <div className="flex-1">
                   <TechStack />
                 </div>
               </div>
