@@ -22,8 +22,8 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-poppins);
+  --font-mono: var(--font-bebas-neue);
 }
 
 /* Enforce dark mode styles always */
@@ -38,6 +38,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/* Use Bebas Neue for headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-bebas-neue), var(--font-sans), sans-serif !important;
+  font-weight: 400;
+  letter-spacing: 0.05em;
 }
 
 /* Smooth scroll offset for fixed navbar */

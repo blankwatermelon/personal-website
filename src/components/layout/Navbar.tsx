@@ -93,6 +93,7 @@ export function Navbar() {
           href="#about"
           onClick={(e) => handleNavClick(e, "#about")}
           className="flex items-center gap-3 text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+          style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
         >
           <Image
             src="/icons/KT.svg"
@@ -119,6 +120,7 @@ export function Navbar() {
                     ? "text-primary"
                     : "text-slate-300 hover:text-primary"
                 )}
+                style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
               >
                 {link.name}
                 {isActive && (
@@ -174,6 +176,7 @@ export function Navbar() {
                       : "text-slate-300 hover:text-primary"
                   )}
                   onClick={(e) => handleNavClick(e, link.href)}
+                  style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
                 >
                   {link.name}
                 </Link>

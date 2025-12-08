@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins, Bebas_Neue, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -11,13 +11,20 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
@@ -65,7 +72,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 text-slate-50 selection:bg-primary/30 selection:text-primary`}
+        className={`${poppins.variable} ${bebasNeue.variable} ${spaceGrotesk.variable} antialiased bg-slate-950 text-slate-50 selection:bg-primary/30 selection:text-primary`}
       >
         <Navbar />
         <main className="min-h-screen pt-20">{children}</main>

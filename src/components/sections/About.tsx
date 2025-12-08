@@ -106,7 +106,7 @@ export const HeroSection = React.memo(function HeroSection({ onAnimationComplete
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="text-primary font-medium mb-4 tracking-wide"
+              className="text-primary font-medium mb-4 tracking-wide text-xl md:text-2xl"
             >
               Hi, I am
             </motion.p>
