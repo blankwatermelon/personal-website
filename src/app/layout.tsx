@@ -3,6 +3,7 @@ import { Poppins, Bebas_Neue, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { MatrixRain } from "@/components/ui/MatrixRain";
 import { portfolioData } from "@/data/portfolio";
 import { StructuredData } from "@/components/seo/StructuredData";
 
@@ -74,8 +75,9 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${poppins.variable} ${bebasNeue.variable} ${spaceGrotesk.variable} antialiased bg-slate-950 text-slate-50 selection:bg-primary/30 selection:text-primary`}
       >
+        <MatrixRain />
         <Navbar />
-        <main className="min-h-screen pt-20">{children}</main>
+        <main className="min-h-screen pt-20 relative z-10">{children}</main>
         <Footer />
       </body>
     </html>
