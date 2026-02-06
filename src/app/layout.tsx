@@ -30,7 +30,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://personal-website-two-pi-35.vercel.app"),
+  metadataBase: new URL("https://kenney-personal.vercel.app"),
   title: {
     template: `%s | ${portfolioData.name}`,
     default: `${portfolioData.name} - ${portfolioData.role}`,

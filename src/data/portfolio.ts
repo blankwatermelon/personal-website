@@ -98,6 +98,15 @@ export const portfolioData: PortfolioData = {
   experience: [],
   projects: [
     {
+      title: "Steven Bot",
+      description:
+        "Built a high-performance Discord music bot with advanced audio streaming capabilities. Features slash commands, YouTube integration, and intelligent queue management. Streams audio directly from YouTube using yt-dlp and FFmpeg with Opus encoding, without saving files to disk for optimal performance and reliability.",
+      techStack: ["TypeScript", "Node.js", "Discord.js", "yt-dlp", "FFmpeg"],
+      link: "",
+      github: "https://github.com/blankwatermelon/steven-bot",
+      thumbnail: "",
+    },
+    {
       title: "URL Shortener",
       description:
         "Built a simple and efficient URL shortener web application with a clean interface for creating and managing shortened links. Features include custom URL aliases, link analytics, and persistent storage. Deployed on Vercel with MongoDB integration.",
