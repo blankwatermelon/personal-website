@@ -100,7 +100,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Steven Bot",
       description:
-        "Built a high-performance Discord music bot with advanced audio streaming capabilities. Features slash commands, YouTube integration, and intelligent queue management. Streams audio directly from YouTube using yt-dlp and FFmpeg with Opus encoding, without saving files to disk for optimal performance and reliability.",
+        "High-performance Discord music bot with slash commands. Streams directly from YouTube using yt-dlp and FFmpeg for optimal efficiency.",
       techStack: ["TypeScript", "Node.js", "Discord.js", "yt-dlp", "FFmpeg"],
       link: "",
       github: "https://github.com/blankwatermelon/steven-bot",
@@ -109,7 +109,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "URL Shortener",
       description:
-        "Built a simple and efficient URL shortener web application with a clean interface for creating and managing shortened links. Features include custom URL aliases, link analytics, and persistent storage. Deployed on Vercel with MongoDB integration.",
+        "Clean URL shortener with custom aliases and analytics. Built with Next.js and MongoDB for persistent storage and management.",
       techStack: ["Next.js", "Tailwind", "MongoDB", "TypeScript", "Vercel"],
       link: "",
       github: "https://github.com/blankwatermelon/cs-391-mp5",
@@ -118,7 +118,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "BU Transit Tracker Web Application",
       description:
-        "Developed a real-time campus bus tracking application integrating BU Transloc API and Google Maps to display live bus positions, routes, and arrival predictions. Implemented Redis caching layer to optimize API performance and reduce latency. Deployed with CI/CD pipeline via Vercel.",
+        "Real-time campus bus tracker integrating Transloc & Google Maps APIs. Uses Redis caching for low-latency updates and predictions.",
       techStack: [
         "Next.js",
         "TypeScript",
@@ -133,7 +133,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Airbnb Price Prediction Model",
       description:
-        "Designed ML pipeline to predict Airbnb listing prices (76K+ records), achieving R² = 0.71 with Random Forest. Conducted feature engineering on amenities and neighborhood-based attributes, handled missing data with imputation, and performed log transformations to reduce skewness and optimize model performance.",
+        "ML pipeline predicting listing prices (R² = 0.71) using Random Forest. Features advanced engineering on 76K+ records.",
       techStack: [
         "Python",
         "scikit-learn",
@@ -149,7 +149,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Multi-threaded Image Processing Server",
       description:
-        "Developed a thread-safe C server with FIFO queue, supporting image registration, blurring, and edge detection. Applied mutexes and semaphores to manage shared data structures, maximizing concurrency and stability.",
+        "Thread-safe C server for concurrent image processing. Uses worker pools and synchronization to handle multiple client requests.",
       techStack: ["C", "POSIX Threads", "Sockets", "Semaphores"],
       link: "",
       github:
@@ -159,7 +159,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Latent Semantic Analysis (LSA) Search Engine",
       description:
-        "Implemented an information retrieval system using LSA to reduce noise (5A matrix with 40k dimensions). Deployed scree plot analysis to optimize trade-off between noise reduction and variance retention. Visualized top-5 results via cosine similarity mapping.",
+        "LSA search engine optimizing information retrieval. Uses dimensionality reduction to filter noise and rank results via cosine similarity.",
       techStack: ["Python", "Flask", "scikit-learn"],
       link: "https://youtu.be/NsGPjbT_1DE",
       github: "https://github.com/blankwatermelon/kenney02-assignment-4",
@@ -168,7 +168,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Microbial Abundance Prediction",
       description:
-        "Modeled log-transformed microbial abundance against pH to capture biological trends, achieving R² = 0.63 with XGBoost. Reduced log-MSE to ±0.83 through hyperparameter tuning and robust data cleaning pipeline.",
+        "Predictive model for microbial abundance vs pH (R² = 0.63). optimized with XGBoost and hyperparameter tuning for accuracy.",
       techStack: [
         "Python",
         "scikit-learn",

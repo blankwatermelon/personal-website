@@ -62,7 +62,7 @@ export const ContactSection = React.memo(function ContactSection() {
   );
 
   return (
-    <section id="contact" className="pt-10 pb-20 bg-black">
+    <section id="contact" className="pt-10 pb-20">
       <div className="container mx-auto px-4 xl:px-24">
         <SectionHeading
           title="Get In Touch"
