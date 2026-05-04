@@ -5,13 +5,12 @@
   --background: #000000;
   --foreground: #f8fafc;
 
-  /* Crimson & Red Palette */
+  /* Brand accent — single source. Crimson is the only colored brand element. */
   --primary: #dc143c;
-  /* Crimson */
+
+  /* Retained for the SectionHeading underline gradient ONLY. Do not introduce new uses. */
   --secondary: #8b0000;
-  /* Dark Red */
-  --accent: #ff4444;
-  /* Bright Red */
+  /* `--accent: #ff4444;` removed — was unused noise in active palette. */
 
   scroll-behavior: smooth;
 }
@@ -21,8 +20,8 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
-  --color-accent: var(--accent);
   --font-sans: var(--font-poppins);
+  --font-display: var(--font-space-grotesk);
   --font-mono: var(--font-bebas-neue);
 }
 
@@ -40,16 +39,348 @@ body {
   overflow-x: hidden;
 }
 
-/* Use Bebas Neue for headings */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-bebas-neue), var(--font-sans), sans-serif !important;
+/* Bebas Neue is reserved for the hero H1 only.
+   Section H2 titles use Space Grotesk semibold; card H3 titles use the body font. */
+h1 {
+  font-family: var(--font-bebas-neue), var(--font-sans), sans-serif;
   font-weight: 400;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+}
+
+h2 {
+  font-family: var(--font-space-grotesk), var(--font-sans), sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h3, h4, h5, h6 {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* Respect reduced-motion globally — kills framer-motion transforms,
+   stops the typing-cursor pulse, etc. Components also gate their own
+   animations on the same media query for finer control. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Smooth scroll offset for fixed navbar */
 [id] {
   scroll-margin-top: 80px;
+}
+
+/* === Boot intro (osu!-style logo entrance) ===
+   The inline script in <head> adds `boot-active` to <html> before paint
+   when the intro should run (first session, no reduced-motion). While the
+   class is on, every body child except the overlay is hidden and any
+   `.blur-up` animations are paused. When BootIntro finishes, it removes
+   the class — page fades in and the hero cascade begins fresh. */
+html.boot-active body > *:not(.boot-overlay) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body > main,
+body > footer,
+body > header {
+  transition: opacity 0.4s ease-out;
+}
+
+html.boot-active .blur-up {
+  animation-play-state: paused;
+}
+
+/* osu!-style welcome scene: black disc with sunburst rays bursting from behind.
+   Three layers stack at center:
+     1. .boot-rays            — primary radiating rays (long, dense)
+     2. .boot-rays-secondary  — counter-rotating layer for shimmer
+     3. .boot-disc            — solid black circle that sits ON TOP of rays
+   The disc masks rays passing through center; rays show only in a halo
+   around the disc, fading outward via radial mask. */
+
+.boot-welcome-scene {
+  position: relative;
+  width: 38vmin;
+  height: 38vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes boot-rays-in {
+  0%   { opacity: 0; transform: scale(0.6) rotate(0deg); }
+  25%  { opacity: 1; }
+  100% { opacity: 1; transform: scale(1) rotate(8deg); }
+}
+
+@keyframes boot-rays-secondary-in {
+  0%   { opacity: 0; transform: scale(0.6) rotate(0deg); }
+  25%  { opacity: 0.7; }
+  100% { opacity: 0.7; transform: scale(1) rotate(-12deg); }
+}
+
+@keyframes boot-rays-pulse {
+  0%   { filter: blur(2px) brightness(1); }
+  20%  { filter: blur(2px) brightness(1.6); }
+  100% { filter: blur(2px) brightness(1); }
+}
+
+.boot-rays {
+  position: absolute;
+  inset: -180%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(220, 20, 60, 0.85) 0deg,
+    rgba(220, 20, 60, 0.85) 0.35deg,
+    transparent 0.35deg,
+    transparent 2deg,
+    rgba(220, 20, 60, 0.5) 2deg,
+    rgba(220, 20, 60, 0.5) 2.5deg,
+    transparent 2.5deg,
+    transparent 4.5deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 0%, transparent 28%, black 38%, black 60%, transparent 95%);
+          mask: radial-gradient(circle, transparent 0%, transparent 28%, black 38%, black 60%, transparent 95%);
+  filter: blur(2px);
+  opacity: 0;
+  transform-origin: center;
+  animation:
+    boot-rays-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards,
+    boot-rays-pulse 0.4s cubic-bezier(0, 1.2, 0.4, 1) 0.55s 3;
+}
+
+.boot-rays-secondary {
+  background: repeating-conic-gradient(
+    from 1.5deg,
+    rgba(220, 20, 60, 0.4) 0deg,
+    rgba(220, 20, 60, 0.4) 0.25deg,
+    transparent 0.25deg,
+    transparent 3deg
+  );
+  filter: blur(3px);
+  animation:
+    boot-rays-secondary-in 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+@keyframes boot-disc-in {
+  0%   { opacity: 0; transform: scale(0); }
+  60%  { opacity: 1; transform: scale(1.06); }
+  80%  { opacity: 1; transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes boot-disc-pulse {
+  0%   { box-shadow: 0 0 80px rgba(220, 20, 60, 0.7), inset 0 0 40px rgba(220, 20, 60, 0.18); }
+  20%  { box-shadow: 0 0 140px rgba(220, 20, 60, 1), inset 0 0 60px rgba(220, 20, 60, 0.35); }
+  100% { box-shadow: 0 0 80px rgba(220, 20, 60, 0.7), inset 0 0 40px rgba(220, 20, 60, 0.18); }
+}
+
+.boot-disc {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #000;
+  /* grid stack so welcome text and logo occupy the same center cell */
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  box-shadow:
+    0 0 80px rgba(220, 20, 60, 0.7),
+    inset 0 0 40px rgba(220, 20, 60, 0.18);
+  animation:
+    boot-disc-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s forwards,
+    boot-disc-pulse 0.4s cubic-bezier(0, 1.2, 0.4, 1) 0.65s 3;
+}
+
+.boot-disc > * {
+  grid-area: 1 / 1;
+}
+
+/* Drifting triangle field — slow upward drift, fades at top */
+.boot-triangles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Mask so triangles fade in/out at top and bottom edges */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+@keyframes boot-triangle-drift {
+  from { transform: translateY(110vh); }
+  to   { transform: translateY(-30vh); }
+}
+
+.boot-triangle {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(220, 20, 60, 0.55), rgba(139, 0, 0, 0.25));
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  animation: boot-triangle-drift linear infinite;
+  will-change: transform;
+}
+
+/* "welcome" text — fades in inside the disc, holds, then fades out as the
+   logo takes over. */
+@keyframes boot-welcome-in {
+  0%   { opacity: 0; transform: translateY(6px); letter-spacing: 0.18em; }
+  100% { opacity: 1; transform: translateY(0); letter-spacing: 0.05em; }
+}
+
+@keyframes boot-welcome-out {
+  0%   { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+.boot-welcome {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: clamp(2rem, 6.5vmin, 4rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow:
+    0 0 24px rgba(220, 20, 60, 0.7),
+    0 0 4px rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  animation:
+    boot-welcome-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards,
+    boot-welcome-out 0.4s ease-out 1.85s forwards;
+}
+
+/* KT logo — fades in inside the disc as the welcome text leaves.
+   Becomes the final reveal moment before the overlay exits. */
+@keyframes boot-logo-in {
+  0%   { opacity: 0; transform: scale(0.45); }
+  60%  { opacity: 1; transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.boot-logo {
+  width: clamp(110px, 22vmin, 280px);
+  height: auto;
+  opacity: 0;
+  filter: drop-shadow(0 0 28px rgba(220, 20, 60, 0.8))
+          drop-shadow(0 0 60px rgba(220, 20, 60, 0.4));
+  animation: boot-logo-in 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) 2s forwards;
+}
+
+/* Kiai flash — first beat whitewash */
+@keyframes boot-flash {
+  0%   { opacity: 0; }
+  6%   { opacity: 0.35; }
+  20%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.boot-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6), transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  animation: boot-flash 1.6s ease-out 0.42s 1 forwards;
+}
+
+@keyframes boot-overlay-exit {
+  to { opacity: 0; }
+}
+
+.boot-overlay-exit {
+  animation: boot-overlay-exit 0.5s ease-out forwards;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-rays,
+  .boot-rays-secondary,
+  .boot-disc,
+  .boot-triangle,
+  .boot-flash,
+  .boot-welcome,
+  .boot-logo,
+  .boot-overlay-exit {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+/* AuthKit-style first-paint cascade. Snappy ease-out-quart, ~700ms total.
+   Combines fade + small lift + de-blur so elements "focus into place"
+   instead of just sliding in. Per-element animation-delay (set inline)
+   creates the stagger. */
+@keyframes blur-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.blur-up {
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(10px);
+  animation: blur-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blur-up {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    animation: none !important;
+  }
+}
+
+/* Scroll-triggered domino reveal.
+   Children of an element with `.reveal-group` start hidden. When the parent
+   enters the viewport, JS adds `.is-revealed`, which kicks off the keyframe
+   on each child. Per-child `animation-delay` (set inline as a stagger index)
+   produces the cascade. Replaces framer-motion `whileInView` to avoid
+   StrictMode double-fire flashes. */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+}
+
+.is-revealed .reveal-up,
+.reveal-up.is-revealed {
+  animation: reveal-up 0.5s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+  }
 }
 
 /* Custom Scrollbar - Webkit (Chrome, Safari, Edge) */
@@ -68,7 +399,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff4444;
+  background: #f43f5e;
 }
 
 /* Custom Scrollbar - Firefox */

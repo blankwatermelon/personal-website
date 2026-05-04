@@ -4,10 +4,13 @@ import React from "react";
 
 import { portfolioData } from "@/data/portfolio";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { motion } from "framer-motion";
-import { TbBriefcase } from "react-icons/tb";
+import { TbBriefcase, TbBrandLinkedin, TbExternalLink } from "react-icons/tb";
+import { useReveal } from "@/lib/useReveal";
+import { cn } from "@/lib/utils";
 
 export const ExperienceSection = React.memo(function ExperienceSection() {
+  const [groupRef, groupRevealed] = useReveal<HTMLDivElement>();
+
   return (
     <div className="h-full">
       <SectionHeading
@@ -23,15 +26,18 @@ export const ExperienceSection = React.memo(function ExperienceSection() {
           </p>
         </div>
       ) : (
-        <div className="relative border-l-2 border-slate-800 ml-4 pl-8 space-y-12">
+        <div
+          ref={groupRef}
+          className={cn(
+            "relative border-l-2 border-slate-800 ml-4 pl-8 space-y-12",
+            groupRevealed && "is-revealed"
+          )}
+        >
           {portfolioData.experience.map((exp, index) => (
-          <motion.div
+          <div
             key={index}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="relative"
+            className="reveal-up relative"
+            style={{ animationDelay: `${index * 100}ms` }}
           >
             {/* Timeline Dot */}
             <span className="absolute -left-[41px] top-0 h-5 w-5 rounded-full bg-slate-950 border-2 border-primary" />
@@ -53,7 +59,23 @@ export const ExperienceSection = React.memo(function ExperienceSection() {
                 <li key={i}>{desc}</li>
               ))}
             </ul>
-          </motion.div>
+
+            {exp.link && (() => {
+              const isLinkedIn = /linkedin\.com/i.test(exp.link);
+              const Icon = isLinkedIn ? TbBrandLinkedin : TbExternalLink;
+              return (
+                <a
+                  href={exp.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 mt-4 text-sm text-primary hover:text-primary/80 transition-colors"
+                >
+                  <Icon size={16} />
+                  {isLinkedIn ? "Read the LinkedIn post" : "Read more"}
+                </a>
+              );
+            })()}
+          </div>
         ))}
         </div>
       )}
