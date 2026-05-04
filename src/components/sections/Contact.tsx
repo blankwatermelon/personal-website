@@ -12,21 +12,7 @@ import {
   TbAlertCircle,
 } from "react-icons/tb";
 
-// Fail loudly in production builds if the Web3Forms access key isn't wired up.
-// In dev we warn instead of throwing so local UI work isn't blocked by env.
 const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
-if (!WEB3FORMS_KEY) {
-  if (process.env.NODE_ENV === "production") {
-    throw new Error(
-      "NEXT_PUBLIC_WEB3FORMS_KEY is not set. Add it to your environment before building — the contact form will silently 403 in prod without it."
-    );
-  } else if (typeof window === "undefined") {
-    // Server-side dev render — noisy console warning so it can't be missed.
-    console.warn(
-      "[Contact] NEXT_PUBLIC_WEB3FORMS_KEY is not set. Form submissions will fail until you configure it."
-    );
-  }
-}
 
 export const ContactSection = React.memo(function ContactSection() {
   const [formState, setFormState] = useState<
@@ -38,10 +24,26 @@ export const ContactSection = React.memo(function ContactSection() {
     message: "",
   });
 
+  // Validate key at runtime, not build time
+  React.useEffect(() => {
+    if (!WEB3FORMS_KEY && typeof window !== "undefined") {
+      console.warn(
+        "[Contact] NEXT_PUBLIC_WEB3FORMS_KEY is not set. Form submissions will fail until you configure it."
+      );
+    }
+  }, []);
+
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
       setFormState("loading");
+
+      if (!WEB3FORMS_KEY) {
+        console.error("Web3Forms key is not configured");
+        setFormState("error");
+        setTimeout(() => setFormState("idle"), 5000);
+        return;
+      }
 
       try {
         const response = await fetch("https://api.web3forms.com/submit", {
