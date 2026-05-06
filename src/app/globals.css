@@ -116,61 +116,6 @@ html.boot-active .blur-up {
   justify-content: center;
 }
 
-@keyframes boot-rays-in {
-  0%   { opacity: 0; transform: scale(0.6) rotate(0deg); }
-  25%  { opacity: 1; }
-  100% { opacity: 1; transform: scale(1) rotate(8deg); }
-}
-
-@keyframes boot-rays-secondary-in {
-  0%   { opacity: 0; transform: scale(0.6) rotate(0deg); }
-  25%  { opacity: 0.7; }
-  100% { opacity: 0.7; transform: scale(1) rotate(-12deg); }
-}
-
-@keyframes boot-rays-pulse {
-  0%   { filter: blur(2px) brightness(1); }
-  20%  { filter: blur(2px) brightness(1.6); }
-  100% { filter: blur(2px) brightness(1); }
-}
-
-.boot-rays {
-  position: absolute;
-  inset: -180%;
-  background: repeating-conic-gradient(
-    from 0deg,
-    rgba(220, 20, 60, 0.85) 0deg,
-    rgba(220, 20, 60, 0.85) 0.35deg,
-    transparent 0.35deg,
-    transparent 2deg,
-    rgba(220, 20, 60, 0.5) 2deg,
-    rgba(220, 20, 60, 0.5) 2.5deg,
-    transparent 2.5deg,
-    transparent 4.5deg
-  );
-  -webkit-mask: radial-gradient(circle, transparent 0%, transparent 28%, black 38%, black 60%, transparent 95%);
-          mask: radial-gradient(circle, transparent 0%, transparent 28%, black 38%, black 60%, transparent 95%);
-  filter: blur(2px);
-  opacity: 0;
-  transform-origin: center;
-  animation:
-    boot-rays-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards,
-    boot-rays-pulse 0.4s cubic-bezier(0, 1.2, 0.4, 1) 0.55s 3;
-}
-
-.boot-rays-secondary {
-  background: repeating-conic-gradient(
-    from 1.5deg,
-    rgba(220, 20, 60, 0.4) 0deg,
-    rgba(220, 20, 60, 0.4) 0.25deg,
-    transparent 0.25deg,
-    transparent 3deg
-  );
-  filter: blur(3px);
-  animation:
-    boot-rays-secondary-in 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
-}
-
 @keyframes boot-disc-in {
   0%   { opacity: 0; transform: scale(0); }
   60%  { opacity: 1; transform: scale(1.06); }
@@ -178,10 +123,15 @@ html.boot-active .blur-up {
   100% { opacity: 1; transform: scale(1); }
 }
 
-@keyframes boot-disc-pulse {
-  0%   { box-shadow: 0 0 80px rgba(220, 20, 60, 0.7), inset 0 0 40px rgba(220, 20, 60, 0.18); }
-  20%  { box-shadow: 0 0 140px rgba(220, 20, 60, 1), inset 0 0 60px rgba(220, 20, 60, 0.35); }
-  100% { box-shadow: 0 0 80px rgba(220, 20, 60, 0.7), inset 0 0 40px rgba(220, 20, 60, 0.18); }
+@keyframes boot-glow-breath {
+  0%, 100% { 
+    opacity: 0.3; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.08); 
+  }
 }
 
 .boot-disc {
@@ -195,39 +145,29 @@ html.boot-active .blur-up {
   place-items: center;
   opacity: 0;
   box-shadow:
-    0 0 80px rgba(220, 20, 60, 0.7),
-    inset 0 0 40px rgba(220, 20, 60, 0.18);
+    0 0 80px rgba(220, 20, 60, 0.6),
+    inset 0 0 40px rgba(220, 20, 60, 0.15);
+  will-change: transform, opacity;
   animation:
-    boot-disc-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s forwards,
-    boot-disc-pulse 0.4s cubic-bezier(0, 1.2, 0.4, 1) 0.65s 3;
+    boot-disc-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s forwards;
+}
+
+.boot-disc::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 
+    0 0 120px rgba(220, 20, 60, 0.9), 
+    inset 0 0 50px rgba(220, 20, 60, 0.3);
+  opacity: 0;
+  will-change: opacity, transform;
+  animation: boot-glow-breath 1.1s ease-in-out 0.7s 3;
 }
 
 .boot-disc > * {
   grid-area: 1 / 1;
-}
-
-/* Drifting triangle field — slow upward drift, fades at top */
-.boot-triangles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  /* Mask so triangles fade in/out at top and bottom edges */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-          mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-}
-
-@keyframes boot-triangle-drift {
-  from { transform: translateY(110vh); }
-  to   { transform: translateY(-30vh); }
-}
-
-.boot-triangle {
-  position: absolute;
-  bottom: 0;
-  background: linear-gradient(180deg, rgba(220, 20, 60, 0.55), rgba(139, 0, 0, 0.25));
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  animation: boot-triangle-drift linear infinite;
-  will-change: transform;
 }
 
 /* "welcome" text — fades in inside the disc, holds, then fades out as the
@@ -238,8 +178,8 @@ html.boot-active .blur-up {
 }
 
 @keyframes boot-welcome-out {
-  0%   { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-4px); }
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.95); }
 }
 
 .boot-welcome {
@@ -254,14 +194,14 @@ html.boot-active .blur-up {
   opacity: 0;
   animation:
     boot-welcome-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards,
-    boot-welcome-out 0.4s ease-out 1.85s forwards;
+    boot-welcome-out 0.3s ease-out 2.9s forwards;
 }
 
-/* KT logo — fades in inside the disc as the welcome text leaves.
-   Becomes the final reveal moment before the overlay exits. */
-@keyframes boot-logo-in {
-  0%   { opacity: 0; transform: scale(0.45); }
-  60%  { opacity: 1; transform: scale(1.12); }
+/* KT logo — synchronized perfectly with the 3rd breath (1.1s duration).
+   Inhales (pops out) to 1.12 scale by 50%, exhales (settles) to 1.0 scale by 100%. */
+@keyframes boot-logo-sync {
+  0%   { opacity: 0; transform: scale(0.6); }
+  50%  { opacity: 1; transform: scale(1.12); }
   100% { opacity: 1; transform: scale(1); }
 }
 
@@ -271,7 +211,8 @@ html.boot-active .blur-up {
   opacity: 0;
   filter: drop-shadow(0 0 28px rgba(220, 20, 60, 0.8))
           drop-shadow(0 0 60px rgba(220, 20, 60, 0.4));
-  animation: boot-logo-in 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) 2s forwards;
+  /* Matches the 1.1s breath duration and uses ease-in-out to mimic the organic curve */
+  animation: boot-logo-sync 1.1s ease-in-out 2.9s forwards;
 }
 
 /* Kiai flash — first beat whitewash */
