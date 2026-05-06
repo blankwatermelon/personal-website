@@ -14,8 +14,7 @@ function isYouTube(url: string) {
 /**
  * Typographic poster fallback for projects without a thumbnail.
  * Renders the primary tech tag as a large display-font headline over a
- * crimson→near-black gradient. Replaced the moment a real screenshot is
- * dropped into public/images/projects/ and wired up via project.thumbnail.
+ * crimson→near-black gradient. 
  */
 function ProjectPoster({ tech }: { tech: string }) {
   return (
@@ -43,9 +42,6 @@ function ProjectPoster({ tech }: { tech: string }) {
           {tech}
         </span>
       </div>
-      <div className="absolute bottom-3 left-4 text-[0.65rem] uppercase tracking-[0.25em] text-slate-300/70">
-        Preview · screenshot pending
-      </div>
     </div>
   );
 }
@@ -63,53 +59,55 @@ export const ProjectCard = React.memo(function ProjectCard({
 
   return (
     <div
-      className="reveal-up group relative bg-black rounded-xl overflow-hidden border border-white/5 hover:border-primary/30 transition-all duration-500 flex flex-col h-full"
+      className="reveal-up group flex flex-col h-full"
       style={{ animationDelay: `${index * 80}ms` }}
     >
-      {/* Accent bar that appears on hover */}
-      <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top" />
-
-      {project.thumbnail ? (
-        <div className="relative aspect-video w-full overflow-hidden flex-shrink-0 grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700">
+      {/* Image Container: Border-less, slightly rounded, scale + grayscale hover */}
+      <div className="relative aspect-video w-full overflow-hidden flex-shrink-0 rounded-lg grayscale-[0.4] group-hover:grayscale-0 transition-all duration-700">
+        {project.thumbnail ? (
           <Image
             src={project.thumbnail}
             alt={project.title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
+            className="object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
             loading="lazy"
           />
-        </div>
-      ) : (
-        <ProjectPoster tech={primaryTech} />
-      )}
+        ) : (
+          <ProjectPoster tech={primaryTech} />
+        )}
+      </div>
 
-      <div className="p-8 flex flex-col flex-1">
+      {/* Content: Floating below the image, no container padding */}
+      <div className="py-6 flex flex-col flex-1">
+        <div className="flex flex-wrap gap-x-4 gap-y-1 mb-3">
+          {project.techStack.map((tech, i) => (
+            <span
+              key={i}
+              className="text-[10px] uppercase tracking-[0.2em] font-bold text-primary/80"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+        
         <h3 
           className="text-2xl font-bold text-slate-100 mb-3 tracking-tight group-hover:text-primary transition-colors duration-300"
           style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
         >
           {project.title}
         </h3>
-        <p className="text-slate-500 text-sm mb-6 line-clamp-4 font-light leading-relaxed">
+        
+        <p className="text-slate-500 text-sm mb-6 line-clamp-3 font-light leading-relaxed">
           {project.description}
         </p>
-        <div className="flex flex-wrap gap-x-4 gap-y-2 mb-8 mt-auto">
-          {project.techStack.map((tech, i) => (
-            <span
-              key={i}
-              className="text-[10px] uppercase tracking-widest font-bold text-slate-600 group-hover:text-slate-400 transition-colors"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-        <div className="flex items-center gap-6 pt-4 border-t border-white/5">
+        
+        <div className="flex items-center gap-6 mt-auto">
           {project.github && (
             <Link
               href={project.github}
               target="_blank"
-              className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-white transition-colors"
+              className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-colors"
             >
               <TbBrandGithub size={18} /> Code
             </Link>
@@ -118,7 +116,7 @@ export const ProjectCard = React.memo(function ProjectCard({
             <Link
               href={project.link}
               target="_blank"
-              className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary hover:text-primary/80 transition-colors"
+              className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary hover:text-primary/80 transition-colors"
             >
               <TbExternalLink size={18} /> {liveLabel}
             </Link>
