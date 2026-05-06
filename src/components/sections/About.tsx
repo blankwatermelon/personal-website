@@ -33,54 +33,54 @@ export const HeroSection = React.memo(function HeroSection() {
           {/* Left Content */}
           <div className="flex-1 text-center lg:text-left">
             <p
-              className="blur-up text-primary font-medium mb-4 tracking-wide text-xl md:text-2xl"
+              className="blur-up text-primary font-bold mb-4 tracking-[0.3em] uppercase text-xs"
               style={{ animationDelay: "0ms" }}
             >
               Hi, I am
             </p>
             <h1
-              className="blur-up text-5xl md:text-7xl font-bold text-slate-100 mb-6"
-              style={{ animationDelay: "80ms" }}
+              className="blur-up text-6xl md:text-8xl font-bold text-slate-100 mb-4 tracking-tighter"
+              style={{ animationDelay: "80ms", fontFamily: 'var(--font-space-grotesk), sans-serif' }}
             >
               {portfolioData.name}
             </h1>
             <h2
-              className="blur-up text-2xl md:text-4xl text-slate-300 mb-6 font-semibold"
+              className="blur-up text-xl md:text-3xl text-slate-500 mb-8 font-light tracking-wide"
               style={{ animationDelay: "180ms" }}
             >
               {portfolioData.role}
             </h2>
 
             <p
-              className="blur-up text-lg text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 text-left"
+              className="blur-up text-lg text-slate-500 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 text-left font-light"
               style={{ animationDelay: "260ms" }}
             >
               {portfolioData.about}
             </p>
 
             <div
-              className="blur-up flex flex-col items-center lg:items-start gap-8"
+              className="blur-up flex flex-col items-center lg:items-start gap-10"
               style={{ animationDelay: "340ms" }}
             >
               {/* Social Media Icons */}
               <SocialIcons variant="default" />
 
               {/* Buttons */}
-              <div className="flex flex-row flex-wrap items-center justify-center lg:justify-start gap-4">
+              <div className="flex flex-row flex-wrap items-center justify-center lg:justify-start gap-6">
                 <Link
                   href="#projects"
                   onClick={handleScrollToProjects}
-                  className="w-42 px-8 py-3 border-2 border-primary text-primary font-bold rounded-full hover:bg-primary/10 transition-all flex items-center justify-center gap-2"
+                  className="px-10 py-4 bg-primary text-white font-bold uppercase tracking-widest text-xs rounded-none hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-3"
                 >
-                  Projects <TbArrowRight size={20} />
+                  View Projects <TbArrowRight size={16} />
                 </Link>
 
                 <Link
                   href="/files/resume.pdf"
                   target="_blank"
-                  className="w-42 px-8 py-3 border-2 border-slate-700 text-slate-300 font-bold rounded-full hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
+                  className="px-10 py-4 border border-white/10 text-slate-500 font-bold uppercase tracking-widest text-xs rounded-none hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center gap-3"
                 >
-                  Resume <TbDownload size={20} />
+                  Resume <TbDownload size={16} />
                 </Link>
               </div>
             </div>

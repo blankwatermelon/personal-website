@@ -1,66 +1,70 @@
 "use client";
 
 import React from "react";
-
 import { portfolioData } from "@/data/portfolio";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useReveal } from "@/lib/useReveal";
 import { cn } from "@/lib/utils";
 
-const SkillCategory = React.memo(function SkillCategory({
-  title,
-  skills,
-  index,
-}: {
+interface SkillGroupProps {
   title: string;
   skills: string[];
   index: number;
-}) {
+}
+
+const SkillGroup = React.memo(function SkillGroup({
+  title,
+  skills,
+  index,
+}: SkillGroupProps) {
   return (
-    <div
-      className="reveal-up bg-slate-800/30 p-6 rounded-2xl border border-slate-800 hover:border-primary/50 transition-colors"
-      style={{ animationDelay: `${index * 80}ms` }}
+    <div 
+      className="reveal-up py-4 border-b border-white/5 hover:border-primary/30 transition-colors duration-500 group"
+      style={{ animationDelay: `${index * 100}ms` }}
     >
-      <h3 className="text-xl font-semibold text-slate-200 mb-4 border-b border-slate-800 pb-2">
-        {title}
-      </h3>
-      <div className="flex flex-wrap gap-2">
-        {skills.map((skill, index) => (
-          <span
-            key={index}
-            className="px-3 py-1 bg-slate-800 text-slate-300 text-sm rounded-full hover:bg-primary/20 hover:text-primary transition-colors cursor-default"
-          >
-            {skill}
-          </span>
-        ))}
+      <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-12">
+        <h3 className="text-[10px] font-bold text-primary/60 uppercase tracking-[0.2em] w-32 shrink-0">
+          {title}
+        </h3>
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
+          {skills.map((skill, idx) => (
+            <span
+              key={idx}
+              className="text-lg md:text-xl font-light text-slate-400 group-hover:text-slate-200 transition-colors duration-300 hover:!text-primary cursor-default"
+              style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
 });
 
 export const TechStack = React.memo(function TechStack() {
-  const [gridRef, gridRevealed] = useReveal<HTMLDivElement>();
+  const [containerRef, revealed] = useReveal<HTMLDivElement>();
 
   return (
-    <div className="h-full">
+    <section id="tech-stack" className="py-12">
       <SectionHeading
         title="Tech Stack"
-        subtitle="Technologies I work with"
+        subtitle="A collection of technologies I use to build robust, scalable applications."
         center={false}
       />
 
       <div
-        ref={gridRef}
+        ref={containerRef}
         className={cn(
-          "grid grid-cols-1 sm:grid-cols-2 gap-6",
-          gridRevealed && "is-revealed"
+          "flex flex-col mt-4",
+          revealed && "is-revealed"
         )}
       >
-        <SkillCategory index={0} title="Languages" skills={portfolioData.skills.languages} />
-        <SkillCategory index={1} title="Libraries" skills={portfolioData.skills.libraries} />
-        <SkillCategory index={2} title="Databases" skills={portfolioData.skills.web} />
-        <SkillCategory index={3} title="Tools" skills={portfolioData.skills.tools} />
+        <SkillGroup index={0} title="Languages" skills={portfolioData.skills.languages} />
+        <SkillGroup index={1} title="Libraries" skills={portfolioData.skills.libraries} />
+        <SkillGroup index={2} title="Databases" skills={portfolioData.skills.web} />
+        <SkillGroup index={3} title="Tools" skills={portfolioData.skills.tools} />
       </div>
-    </div>
+    </section>
   );
 });

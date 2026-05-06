@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-const BOOT_DURATION = 4200;
+const BOOT_DURATION = 3000;
 const FADE_DURATION = 500;
 const SESSION_KEY = "boot-played";
 

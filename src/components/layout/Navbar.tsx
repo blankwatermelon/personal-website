@@ -86,7 +86,7 @@ export function Navbar() {
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent",
         isScrolled
-          ? "bg-slate-950/80 backdrop-blur-md border-white/5 shadow-sm"
+          ? "bg-black/80 backdrop-blur-xl border-primary/20 shadow-lg shadow-black/40"
           : "bg-transparent"
       )}
     >
@@ -162,7 +162,7 @@ export function Navbar() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="md:hidden absolute top-full left-0 w-full bg-slate-950/95 backdrop-blur-lg border-b border-white/5"
+          className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl border-b border-primary/20"
         >
           <nav className="flex flex-col p-6 gap-4">
             {navLinks.map((link) => {
