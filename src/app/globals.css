@@ -84,6 +84,10 @@ h3, h4, h5, h6 {
    class is on, every body child except the overlay is hidden and any
    `.blur-up` animations are paused. When BootIntro finishes, it removes
    the class — page fades in and the hero cascade begins fresh. */
+html.boot-active {
+  overflow: hidden;
+}
+
 html.boot-active body > *:not(.boot-overlay) {
   opacity: 0;
   pointer-events: none;
