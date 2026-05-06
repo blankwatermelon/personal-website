@@ -4,22 +4,22 @@ import React from "react";
 
 import { portfolioData } from "@/data/portfolio";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { motion } from "framer-motion";
+import { useReveal } from "@/lib/useReveal";
+import { cn } from "@/lib/utils";
 
 const SkillCategory = React.memo(function SkillCategory({
   title,
   skills,
+  index,
 }: {
   title: string;
   skills: string[];
+  index: number;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="bg-slate-800/30 p-6 rounded-2xl border border-slate-800 hover:border-primary/50 transition-colors"
+    <div
+      className="reveal-up bg-slate-800/30 p-6 rounded-2xl border border-slate-800 hover:border-primary/50 transition-colors"
+      style={{ animationDelay: `${index * 80}ms` }}
     >
       <h3 className="text-xl font-semibold text-slate-200 mb-4 border-b border-slate-800 pb-2">
         {title}
@@ -34,11 +34,13 @@ const SkillCategory = React.memo(function SkillCategory({
           </span>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 });
 
 export const TechStack = React.memo(function TechStack() {
+  const [gridRef, gridRevealed] = useReveal<HTMLDivElement>();
+
   return (
     <div className="h-full">
       <SectionHeading
@@ -47,14 +49,17 @@ export const TechStack = React.memo(function TechStack() {
         center={false}
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <SkillCategory title="Languages" skills={portfolioData.skills.languages} />
-        <SkillCategory
-          title="Libraries"
-          skills={portfolioData.skills.libraries}
-        />
-        <SkillCategory title="Database" skills={portfolioData.skills.web} />
-        <SkillCategory title="Tools" skills={portfolioData.skills.tools} />
+      <div
+        ref={gridRef}
+        className={cn(
+          "grid grid-cols-1 sm:grid-cols-2 gap-6",
+          gridRevealed && "is-revealed"
+        )}
+      >
+        <SkillCategory index={0} title="Languages" skills={portfolioData.skills.languages} />
+        <SkillCategory index={1} title="Libraries" skills={portfolioData.skills.libraries} />
+        <SkillCategory index={2} title="Databases" skills={portfolioData.skills.web} />
+        <SkillCategory index={3} title="Tools" skills={portfolioData.skills.tools} />
       </div>
     </div>
   );

@@ -12,6 +12,8 @@ import {
   TbAlertCircle,
 } from "react-icons/tb";
 
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+
 export const ContactSection = React.memo(function ContactSection() {
   const [formState, setFormState] = useState<
     "idle" | "loading" | "success" | "error"
@@ -22,10 +24,26 @@ export const ContactSection = React.memo(function ContactSection() {
     message: "",
   });
 
+  // Validate key at runtime, not build time
+  React.useEffect(() => {
+    if (!WEB3FORMS_KEY && typeof window !== "undefined") {
+      console.warn(
+        "[Contact] NEXT_PUBLIC_WEB3FORMS_KEY is not set. Form submissions will fail until you configure it."
+      );
+    }
+  }, []);
+
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
       setFormState("loading");
+
+      if (!WEB3FORMS_KEY) {
+        console.error("Web3Forms key is not configured");
+        setFormState("error");
+        setTimeout(() => setFormState("idle"), 5000);
+        return;
+      }
 
       try {
         const response = await fetch("https://api.web3forms.com/submit", {
@@ -34,8 +52,7 @@ export const ContactSection = React.memo(function ContactSection() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            access_key:
-              process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "ACCESS_KEY_HERE",
+            access_key: WEB3FORMS_KEY,
             name: formData.name,
             email: formData.email,
             message: formData.message,
@@ -53,7 +70,7 @@ export const ContactSection = React.memo(function ContactSection() {
           setFormState("error");
           setTimeout(() => setFormState("idle"), 5000);
         }
-      } catch (error) {
+      } catch {
         setFormState("error");
         setTimeout(() => setFormState("idle"), 5000);
       }
@@ -111,7 +128,7 @@ export const ContactSection = React.memo(function ContactSection() {
               </a>
 
               <div className="flex items-center gap-4 text-slate-300 p-4 bg-slate-800/30 rounded-xl border border-slate-800">
-                <div className="bg-secondary/10 p-3 rounded-full text-secondary">
+                <div className="bg-slate-700/40 p-3 rounded-full text-slate-300">
                   <TbMapPin size={24} />
                 </div>
                 <div>
@@ -131,7 +148,7 @@ export const ContactSection = React.memo(function ContactSection() {
             className="bg-slate-800/30 p-4 rounded-2xl border border-slate-800"
           >
             <form className="space-y-4" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label
                     htmlFor="name"
@@ -198,7 +215,7 @@ export const ContactSection = React.memo(function ContactSection() {
                 <div className="flex items-center gap-2 text-green-400 bg-green-400/10 border border-green-400/20 rounded-lg px-4 py-3">
                   <TbCircleCheck size={20} />
                   <span>
-                    Message sent successfully! I'll get back to you soon.
+                    Message sent successfully! I&apos;ll get back to you soon.
                   </span>
                 </div>
               )}
@@ -213,7 +230,7 @@ export const ContactSection = React.memo(function ContactSection() {
               <button
                 type="submit"
                 disabled={formState === "loading"}
-                className="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold py-3 rounded-lg hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-primary text-white font-semibold py-3 rounded-lg hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {formState === "loading" ? (
                   <>Sending...</>

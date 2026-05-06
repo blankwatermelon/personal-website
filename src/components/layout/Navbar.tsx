@@ -18,7 +18,7 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState("about");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,16 +58,10 @@ export function Navbar() {
       }
     };
 
-    // Delay initial check to ensure sections are rendered
-    const timeoutId = setTimeout(() => {
-      handleScroll();
-      window.addEventListener("scroll", handleScroll);
-    }, 2000);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleNavClick = (
@@ -100,17 +94,17 @@ export function Navbar() {
         <Link
           href="#about"
           onClick={(e) => handleNavClick(e, "#about")}
-          className="flex items-center gap-3 text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+          className="flex items-center gap-3 text-2xl font-semibold text-slate-100 tracking-tight"
           style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
         >
           <Image
             src="/icons/KT.svg"
             alt="KT"
-            width={40}
-            height={40}
+            width={36}
+            height={36}
             className="rounded-md"
           />
-          Kenney<span className="text-white"> Tran</span>
+          Kenney Tran
         </Link>
 
         {/* Desktop Nav */}
@@ -134,7 +128,7 @@ export function Navbar() {
                 {isActive && (
                   <motion.div
                     layoutId="activeSection"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}

@@ -15,6 +15,7 @@ export interface Experience {
   period: string;
   description: string[];
   logo?: string;
+  link?: string;
 }
 
 export interface Project {
@@ -47,8 +48,8 @@ export const portfolioData: PortfolioData = {
   name: "Kenney Tran",
   role: "CS @ Boston University",
   about:
-    "CS student at Boston University learning by shipping. Built AI-powered developer tools and real-time web apps used by actual users. I enjoy automating repetitive tasks and building solutions that make my life easier. Always focused on writing clean, scalable code that solves real problems!",
-  profileImage: "/images/OSHAWOTT_CRY.png",
+    "CS student at Boston University. I build AI-powered developer tools and real-time web apps shipped to real users — Discord bots, transit trackers, and ML pipelines.",
+  profileImage: "/icons/KT.svg",
   blogUrl: "",
   social: [
     {
@@ -95,7 +96,20 @@ export const portfolioData: PortfolioData = {
     web: ["MongoDB", "Redis"],
     tools: ["Git", "GitHub", "Vercel", "Postman"],
   },
-  experience: [],
+  experience: [
+    {
+      company: "BU Spark!",
+      role: "ML Engineer",
+      period: "January 2026 – May 2026",
+      description: [
+        "Reduced professor grading time from 25+ minutes to 3 minutes per student (8x faster) at $0.04 per assessment by architecting a multi-model pipeline using GPT-4o-mini, Gemini 2.5, and Claude Sonnet.",
+        "Saved ~25 hours per 80-student course by designing a RAG pipeline that retrieves lecture content as grading context, enabling evaluation of diagrams and images within PDFs.",
+        "Improved grading accuracy by 15% across assignment types by implementing rubric-based AI evaluation with few-shot calibration, eliminating grader-to-grader scoring variance.",
+        "Built full-stack interface connecting Python ML backend to instructor-facing frontend, supporting 100+ student assessments per grading cycle for CS 581 Health Informatics.",
+      ],
+      link: "https://www.linkedin.com/feed/update/urn:li:activity:7456175621602279424/",
+    },
+  ],
   projects: [
     {
       title: "Steven Bot",
@@ -104,15 +118,6 @@ export const portfolioData: PortfolioData = {
       techStack: ["TypeScript", "Node.js", "Discord.js", "yt-dlp", "FFmpeg"],
       link: "",
       github: "https://github.com/blankwatermelon/steven-bot",
-      thumbnail: "",
-    },
-    {
-      title: "URL Shortener",
-      description:
-        "Clean URL shortener with custom aliases and analytics. Built with Next.js and MongoDB for persistent storage and management.",
-      techStack: ["Next.js", "Tailwind", "MongoDB", "TypeScript", "Vercel"],
-      link: "",
-      github: "https://github.com/blankwatermelon/cs-391-mp5",
       thumbnail: "",
     },
     {
@@ -147,13 +152,12 @@ export const portfolioData: PortfolioData = {
       thumbnail: "",
     },
     {
-      title: "Multi-threaded Image Processing Server",
+      title: "URL Shortener",
       description:
-        "Thread-safe C server for concurrent image processing. Uses worker pools and synchronization to handle multiple client requests.",
-      techStack: ["C", "POSIX Threads", "Sockets", "Semaphores"],
+        "Clean URL shortener with custom aliases and analytics. Built with Next.js and MongoDB for persistent storage and management.",
+      techStack: ["Next.js", "Tailwind", "MongoDB", "TypeScript", "Vercel"],
       link: "",
-      github:
-        "https://github.com/blankwatermelon/Multi-threaded-Image-Processing-Server",
+      github: "https://github.com/blankwatermelon/cs-391-mp5",
       thumbnail: "",
     },
     {
@@ -166,9 +170,19 @@ export const portfolioData: PortfolioData = {
       thumbnail: "",
     },
     {
+      title: "Multi-threaded Image Processing Server",
+      description:
+        "Thread-safe C server for concurrent image processing. Uses worker pools and synchronization to handle multiple client requests.",
+      techStack: ["C", "POSIX Threads", "Sockets", "Semaphores"],
+      link: "",
+      github:
+        "https://github.com/blankwatermelon/Multi-threaded-Image-Processing-Server",
+      thumbnail: "",
+    },
+    {
       title: "Microbial Abundance Prediction",
       description:
-        "Predictive model for microbial abundance vs pH (R² = 0.63). optimized with XGBoost and hyperparameter tuning for accuracy.",
+        "Predictive model for microbial abundance vs pH (R² = 0.63). Optimized with XGBoost and hyperparameter tuning for accuracy.",
       techStack: [
         "Python",
         "scikit-learn",
