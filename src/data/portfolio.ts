@@ -128,7 +128,7 @@ export const portfolioData: PortfolioData = {
         "Vercel",
       ],
       link: "",
-      github: "https://github.com/onkr0d/391-final-project",
+      github: "https://github.com/blankwatermelon/bu-transit-tracker",
       thumbnail: "/images/projects/transit-tracker.png",
     },
     {
@@ -171,8 +171,7 @@ export const portfolioData: PortfolioData = {
         "Thread-safe C server for concurrent image processing. Uses worker pools and synchronization to handle multiple client requests.",
       techStack: ["C", "POSIX Threads", "Sockets", "Semaphores"],
       link: "",
-      github:
-        "https://github.com/blankwatermelon/Multi-threaded-Image-Processing-Server",
+      github: "",
       thumbnail: "",
     },
     {
