@@ -45,14 +45,14 @@ export const HeroSection = React.memo(function HeroSection() {
               {portfolioData.name}
             </h1>
             <h2
-              className="blur-up text-xl md:text-3xl text-slate-500 mb-8 font-light tracking-wide"
+              className="blur-up text-xl md:text-3xl text-slate-400 mb-8 font-light tracking-wide"
               style={{ animationDelay: "180ms" }}
             >
               {portfolioData.role}
             </h2>
 
             <p
-              className="blur-up text-lg text-slate-500 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 text-left font-light"
+              className="blur-up text-lg text-slate-400 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 text-left font-light"
               style={{ animationDelay: "260ms" }}
             >
               {portfolioData.about}

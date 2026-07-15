@@ -29,7 +29,7 @@ export function SectionHeading({
       {subtitle && (
         <p
           className={cn(
-            "text-slate-500 text-lg max-w-2xl font-light",
+            "text-slate-400 text-lg max-w-2xl font-light",
             center && "mx-auto"
           )}
         >

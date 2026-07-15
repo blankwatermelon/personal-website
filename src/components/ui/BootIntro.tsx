@@ -14,7 +14,18 @@ export function BootIntro() {
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    // TEMP: gating disabled so the boot intro plays on every load.
+    // Play once per session: skip straight to done on repeat loads.
+    let alreadyPlayed = false;
+    try {
+      alreadyPlayed = sessionStorage.getItem(SESSION_KEY) === "1";
+    } catch {}
+
+    if (alreadyPlayed) {
+      document.documentElement.classList.remove("boot-active");
+      setPhase("done");
+      return;
+    }
+
     setPhase("active");
 
     const exitTimer = window.setTimeout(() => {

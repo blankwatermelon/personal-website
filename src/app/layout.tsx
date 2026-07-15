@@ -10,12 +10,17 @@ import { StructuredData } from "@/components/seo/StructuredData";
 
 // Runs synchronously in <head> before paint. Adds `boot-active` to <html>
 // so CSS hides the page (and pauses .blur-up) until BootIntro finishes.
-// TEMP: gating disabled so the boot intro plays on every load while we verify.
+// Skipped when the intro already played this session, so returning visitors
+// never see a hidden-page flash.
 const bootBlockerScript = `
 (function() {
   try {
+    if (sessionStorage.getItem('boot-played') !== '1') {
+      document.documentElement.classList.add('boot-active');
+    }
+  } catch (e) {
     document.documentElement.classList.add('boot-active');
-  } catch (e) {}
+  }
 })();
 `;
 
@@ -41,13 +46,28 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
+const siteDescription =
+  "Boston University CS '26 grad seeking new-grad software engineering roles. ML pipelines, full-stack web, and systems projects.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://kenney-personal.vercel.app"),
   title: {
     template: `%s | ${portfolioData.name}`,
     default: `${portfolioData.name} - ${portfolioData.role}`,
   },
-  description: portfolioData.about,
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    url: "https://kenney-personal.vercel.app",
+    siteName: portfolioData.name,
+    title: `${portfolioData.name} - ${portfolioData.role}`,
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${portfolioData.name} - ${portfolioData.role}`,
+    description: siteDescription,
+  },
   keywords: [
     "Computer Science Student",
     "Software Developer",

@@ -98,7 +98,7 @@ export const ProjectCard = React.memo(function ProjectCard({
           {project.title}
         </h3>
         
-        <p className="text-slate-500 text-sm mb-6 line-clamp-3 font-light leading-relaxed">
+        <p className="text-slate-400 text-sm mb-6 line-clamp-3 font-light leading-relaxed">
           {project.description}
         </p>
         

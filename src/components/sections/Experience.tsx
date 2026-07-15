@@ -4,7 +4,7 @@ import React from "react";
 
 import { portfolioData } from "@/data/portfolio";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { TbBriefcase, TbBrandLinkedin, TbExternalLink } from "react-icons/tb";
+import { TbBrandLinkedin, TbExternalLink } from "react-icons/tb";
 import { useReveal } from "@/lib/useReveal";
 import { cn } from "@/lib/utils";
 
@@ -29,7 +29,7 @@ export const ExperienceSection = React.memo(function ExperienceSection() {
     <div className="h-full">
       <SectionHeading
         title="Experience"
-        subtitle="My professional journey and industry impact."
+        subtitle="Where I've worked and what I shipped."
         center={false}
       />
 
@@ -71,7 +71,7 @@ export const ExperienceSection = React.memo(function ExperienceSection() {
               </div>
             </div>
 
-            <ul className="space-y-4 text-slate-500 font-light leading-relaxed">
+            <ul className="space-y-4 text-slate-400 font-light leading-relaxed">
               {exp.description.map((desc, i) => (
                 <li key={i} className="flex gap-3">
                   <span className="text-primary mt-1.5 shrink-0 w-1 h-1 rounded-full bg-primary" />
@@ -99,6 +99,43 @@ export const ExperienceSection = React.memo(function ExperienceSection() {
             })()}
           </div>
         ))}
+
+          {portfolioData.education.map((edu, index) => (
+            <div
+              key={edu.school}
+              className="reveal-up relative group"
+              style={{
+                animationDelay: `${(portfolioData.experience.length + index) * 100}ms`,
+              }}
+            >
+              {/* Timeline Indicator */}
+              <span className="absolute -left-[45px] top-1.5 h-2 w-2 bg-primary rotate-45 group-hover:scale-150 transition-transform duration-500" />
+
+              <div className="flex flex-col gap-1 mb-4">
+                <span className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-1">
+                  {edu.period}
+                </span>
+                <h3
+                  className="text-2xl font-bold text-slate-100 tracking-tight"
+                  style={{ fontFamily: "var(--font-space-grotesk), sans-serif" }}
+                >
+                  {edu.degree}
+                </h3>
+                <div className="flex items-center gap-2 text-slate-500 font-medium">
+                  <span className="text-sm tracking-wide">@ {edu.school}</span>
+                </div>
+              </div>
+
+              <ul className="space-y-4 text-slate-400 font-light leading-relaxed">
+                {edu.details.map((detail, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="text-primary mt-1.5 shrink-0 w-1 h-1 rounded-full bg-primary" />
+                    <span className="text-sm md:text-base">{detail}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       )}
     </div>

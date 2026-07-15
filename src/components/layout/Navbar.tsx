@@ -47,11 +47,18 @@ export function Navbar() {
         return null;
       }).filter(Boolean);
 
-      // Find the section that's most visible in the viewport
-      const current = sections.find((section) => {
-        if (!section) return false;
-        return section.top <= 100 && section.bottom > 100;
-      });
+      // At the very bottom of the page, the last section wins even if its
+      // top never crosses the threshold (short sections like Contact).
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {
+        const last = sections[sections.length - 1];
+        if (last) setActiveSection(last.id);
+        return;
+      }
+
+      // Otherwise, the active section is the last one whose top has passed
+      // the navbar threshold.
+      const passed = sections.filter((section) => section && section.top <= 150);
+      const current = passed[passed.length - 1];
 
       if (current) {
         setActiveSection(current.id);

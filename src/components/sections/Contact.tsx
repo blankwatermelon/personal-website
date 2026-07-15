@@ -83,7 +83,7 @@ export const ContactSection = React.memo(function ContactSection() {
       <div className="container mx-auto px-4 xl:px-24">
         <SectionHeading
           title="Get In Touch"
-          subtitle="Let's work together"
+          subtitle="Open to new-grad software engineering roles"
           center={false}
         />
 
@@ -98,12 +98,12 @@ export const ContactSection = React.memo(function ContactSection() {
           >
             <div className="space-y-4">
               <h3 className="text-2xl font-bold text-slate-100">
-                Let&apos;s talk about your next project
+                Let&apos;s connect
               </h3>
               <p className="text-slate-400">
-                Feel free to reach out for collaborations, freelance projects,
-                or full-time opportunities. I&apos;d be happy to hear from you.
-                Fill out the form or contact me directly via email to connect.
+                I&apos;m actively looking for full-time software engineering
+                roles and would love to hear about opportunities on your team.
+                Fill out the form or reach me directly via email or LinkedIn.
               </p>
             </div>
 
@@ -206,7 +206,7 @@ export const ContactSection = React.memo(function ContactSection() {
                   }
                   rows={4}
                   className="w-full bg-black border border-slate-800 rounded-lg px-4 py-3 text-slate-100 focus:outline-none focus:border-primary transition-colors resize-none"
-                  placeholder="Tell me about your project..."
+                  placeholder="Tell me about the role or opportunity..."
                 />
               </div>
 

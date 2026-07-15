@@ -18,6 +18,13 @@ export interface Experience {
   link?: string;
 }
 
+export interface Education {
+  school: string;
+  degree: string;
+  period: string;
+  details: string[];
+}
+
 export interface Project {
   title: string;
   description: string;
@@ -41,14 +48,15 @@ export interface PortfolioData {
     tools: string[];
   };
   experience: Experience[];
+  education: Education[];
   projects: Project[];
 }
 
 export const portfolioData: PortfolioData = {
   name: "Kenney Tran",
-  role: "CS @ Boston University",
+  role: "CS @ Boston University '26 · Seeking new-grad SWE roles",
   about:
-    "I'm an engineer who finds as much joy in the 'why' as the 'how.' While I spend my time building data pipelines and deploying models, my real focus is on the space where engineering meets ambiguity—the challenge of not just building something, but figuring out how it can actually solve a human problem. I thrive on creating systems that are accurate, reliable, and built to scale, always looking for the most elegant way to turn a complex idea into a working reality.",
+    "I'm a Boston University computer science graduate (Class of 2026) looking for new-grad software engineering roles. Most recently I was an ML engineer at BU Spark!, where I built an AI-assisted grading pipeline that cut professor grading time from 25+ minutes to 3 minutes per student. I like the space where engineering meets ambiguity—not just building something, but figuring out how it actually solves a human problem—and I care about systems that are accurate, reliable, and built to scale.",
   profileImage: "/icons/KT.svg",
   blogUrl: "",
   social: [
@@ -88,6 +96,16 @@ export const portfolioData: PortfolioData = {
       link: "https://www.linkedin.com/feed/update/urn:li:activity:7456175621602279424/",
     },
   ],
+  education: [
+    {
+      school: "Boston University",
+      degree: "BA in Computer Science",
+      period: "Graduated 2026",
+      details: [
+        "Relevant coursework: Data Structures & Algorithms, Operating Systems, Database Systems, Fullstack Development, Machine Learning, Cloud Computing.",
+      ],
+    },
+  ],
   projects: [
     {
       title: "Steven Bot",
@@ -101,7 +119,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "BU Transit Tracker Web Application",
       description:
-        "Real-time campus bus tracker integrating Transloc & Google Maps APIs. Uses Redis caching for low-latency updates and predictions.",
+        "Real-time campus bus tracker integrating Transloc & Google Maps APIs. Redis caching keeps API latency under 100ms and cut compute costs by 60%.",
       techStack: [
         "Next.js",
         "TypeScript",
@@ -111,7 +129,7 @@ export const portfolioData: PortfolioData = {
       ],
       link: "",
       github: "https://github.com/onkr0d/391-final-project",
-      thumbnail: "",
+      thumbnail: "/images/projects/transit-tracker.png",
     },
     {
       title: "Airbnb Price Prediction Model",
@@ -135,7 +153,7 @@ export const portfolioData: PortfolioData = {
         "Clean URL shortener with custom aliases and analytics. Built with Next.js and MongoDB for persistent storage and management.",
       techStack: ["Next.js", "Tailwind", "MongoDB", "TypeScript", "Vercel"],
       link: "",
-      github: "https://github.com/blankwatermelon/cs-391-mp5",
+      github: "https://github.com/blankwatermelon/url-shortener",
       thumbnail: "",
     },
     {
@@ -144,7 +162,7 @@ export const portfolioData: PortfolioData = {
         "LSA search engine optimizing information retrieval. Uses dimensionality reduction to filter noise and rank results via cosine similarity.",
       techStack: ["Python", "Flask", "scikit-learn"],
       link: "https://youtu.be/NsGPjbT_1DE",
-      github: "https://github.com/blankwatermelon/kenney02-assignment-4",
+      github: "https://github.com/blankwatermelon/lsa-search-engine",
       thumbnail: "",
     },
     {
@@ -170,7 +188,7 @@ export const portfolioData: PortfolioData = {
         "XGBoost",
       ],
       link: "",
-      github: "https://github.com/blankwatermelon/506-project",
+      github: "https://github.com/blankwatermelon/microbial-abundance-prediction",
       thumbnail: "",
     },
   ],
