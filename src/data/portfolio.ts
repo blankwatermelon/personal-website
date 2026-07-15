@@ -56,7 +56,7 @@ export const portfolioData: PortfolioData = {
   name: "Kenney Tran",
   role: "CS @ Boston University '26 · Seeking new-grad SWE roles",
   about:
-    "I'm a Boston University computer science graduate (Class of 2026) looking for new-grad software engineering roles. Most recently I was an ML engineer at BU Spark!, where I built an AI-assisted grading pipeline that cut professor grading time from 25+ minutes to 3 minutes per student. I like the space where engineering meets ambiguity—not just building something, but figuring out how it actually solves a human problem—and I care about systems that are accurate, reliable, and built to scale.",
+    "I'm a computer science grad from Boston University (Class of 2026) looking for new-grad software engineering roles. Most recently I was an ML engineer at BU Spark!, where I built an AI-assisted grading pipeline that cut grading time from 25+ minutes to around 3 per student. I like messy, ambiguous problems where half the work is figuring out what to build in the first place, and I care about writing software people actually rely on.",
   profileImage: "/icons/KT.svg",
   blogUrl: "",
   social: [
@@ -110,11 +110,11 @@ export const portfolioData: PortfolioData = {
     {
       title: "Steven Bot",
       description:
-        "High-performance Discord music bot with slash commands. Streams directly from YouTube using yt-dlp and FFmpeg for optimal efficiency.",
+        "Discord music bot with slash commands. Streams audio straight from YouTube with yt-dlp and FFmpeg — no disk writes, sub-200ms playback latency.",
       techStack: ["TypeScript", "Node.js", "Discord.js", "yt-dlp", "FFmpeg"],
       link: "",
       github: "https://github.com/blankwatermelon/steven-bot",
-      thumbnail: "",
+      thumbnail: "/images/projects/steven-bot.png",
     },
     {
       title: "BU Transit Tracker Web Application",
@@ -132,9 +132,18 @@ export const portfolioData: PortfolioData = {
       thumbnail: "/images/projects/transit-tracker.png",
     },
     {
+      title: "FPGA Gaussian Filter Accelerator",
+      description:
+        "Hardware-accelerated 3×3 Gaussian blur written in HLS C++. Streams one pixel per cycle (II=1) on an AMD Kria SoC, validated against an OpenCV golden model.",
+      techStack: ["C++", "Vivado HLS", "AMD Kria", "AXI", "OpenCV"],
+      link: "",
+      github: "https://github.com/JorYin/599-Gaussian-Filter",
+      thumbnail: "/images/projects/fpga-gaussian.png",
+    },
+    {
       title: "Airbnb Price Prediction Model",
       description:
-        "ML pipeline predicting listing prices (R² = 0.71) using Random Forest. Features advanced engineering on 76K+ records.",
+        "ML pipeline predicting listing prices across 76K+ records (R² = 0.71). Random Forest plus a lot of feature engineering on messy data.",
       techStack: [
         "Python",
         "scikit-learn",
@@ -145,25 +154,25 @@ export const portfolioData: PortfolioData = {
       ],
       link: "",
       github: "https://github.com/blankwatermelon/Airbnb-Price-Prediction",
-      thumbnail: "",
+      thumbnail: "/images/projects/airbnb-price.png",
     },
     {
       title: "URL Shortener",
       description:
-        "Clean URL shortener with custom aliases and analytics. Built with Next.js and MongoDB for persistent storage and management.",
+        "URL shortener with custom aliases and click analytics, built on Next.js and MongoDB.",
       techStack: ["Next.js", "Tailwind", "MongoDB", "TypeScript", "Vercel"],
       link: "",
       github: "https://github.com/blankwatermelon/url-shortener",
-      thumbnail: "",
+      thumbnail: "/images/projects/url-shortener.png",
     },
     {
       title: "Latent Semantic Analysis (LSA) Search Engine",
       description:
-        "LSA search engine optimizing information retrieval. Uses dimensionality reduction to filter noise and rank results via cosine similarity.",
+        "Search engine built on latent semantic analysis. Reduces dimensionality to cut through noise, then ranks results by cosine similarity.",
       techStack: ["Python", "Flask", "scikit-learn"],
       link: "https://youtu.be/NsGPjbT_1DE",
       github: "https://github.com/blankwatermelon/lsa-search-engine",
-      thumbnail: "",
+      thumbnail: "/images/projects/lsa-search.png",
     },
     {
       title: "Multi-threaded Image Processing Server",
@@ -172,12 +181,12 @@ export const portfolioData: PortfolioData = {
       techStack: ["C", "POSIX Threads", "Sockets", "Semaphores"],
       link: "",
       github: "",
-      thumbnail: "",
+      thumbnail: "/images/projects/image-server.png",
     },
     {
       title: "Microbial Abundance Prediction",
       description:
-        "Predictive model for microbial abundance vs pH (R² = 0.63). Optimized with XGBoost and hyperparameter tuning for accuracy.",
+        "Predicts microbial abundance from pH (R² = 0.63). XGBoost with hyperparameter tuning.",
       techStack: [
         "Python",
         "scikit-learn",
@@ -188,7 +197,7 @@ export const portfolioData: PortfolioData = {
       ],
       link: "",
       github: "https://github.com/blankwatermelon/microbial-abundance-prediction",
-      thumbnail: "",
+      thumbnail: "/images/projects/microbial.png",
     },
   ],
 };

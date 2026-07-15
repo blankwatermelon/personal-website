@@ -36,7 +36,7 @@ export const HeroSection = React.memo(function HeroSection() {
               className="blur-up text-primary font-bold mb-4 tracking-[0.3em] uppercase text-xs"
               style={{ animationDelay: "0ms" }}
             >
-              Hi, I am
+              Hi, I&apos;m
             </p>
             <h1
               className="blur-up text-6xl md:text-8xl font-bold text-slate-100 mb-4 tracking-tighter"

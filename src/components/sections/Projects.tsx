@@ -24,7 +24,7 @@ export function ProjectsSection() {
       <div className="container mx-auto px-4 xl:px-24">
         <SectionHeading
           title="Featured Projects"
-          subtitle="A focused selection — three projects that show range across real-time TypeScript, full-stack web, and ML."
+          subtitle="Three projects — real-time TypeScript, full-stack web, and FPGA hardware acceleration."
           center={false}
         />
 

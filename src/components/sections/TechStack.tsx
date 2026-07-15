@@ -49,7 +49,7 @@ export const TechStack = React.memo(function TechStack() {
     <section id="tech-stack" className="py-12">
       <SectionHeading
         title="Tech Stack"
-        subtitle="A collection of technologies I use to build robust, scalable applications."
+        subtitle="What I actually build with day to day."
         center={false}
       />
 
