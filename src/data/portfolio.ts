@@ -110,7 +110,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Steven Bot",
       description:
-        "Discord music bot with slash commands. Streams audio straight from YouTube with yt-dlp and FFmpeg — no disk writes, sub-200ms playback latency.",
+        "A Discord music bot I built for my friend group after the big music bots got shut down. It streams audio straight from YouTube with yt-dlp and FFmpeg without ever touching the disk, so songs start playing almost as soon as you ask for them.",
       techStack: ["TypeScript", "Node.js", "Discord.js", "yt-dlp", "FFmpeg"],
       link: "",
       github: "https://github.com/blankwatermelon/steven-bot",
@@ -119,7 +119,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "BU Transit Tracker Web Application",
       description:
-        "Real-time campus bus tracker integrating Transloc & Google Maps APIs. Redis caching keeps API latency under 100ms and cut compute costs by 60%.",
+        "BU's official shuttle tracker always felt slow and clunky, so I made my own. It pulls live bus positions from Transloc and plots them on Google Maps, with Redis caching in front so the app stays snappy without hammering the upstream APIs.",
       techStack: [
         "Next.js",
         "TypeScript",
@@ -134,7 +134,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "FPGA Gaussian Filter Accelerator",
       description:
-        "Hardware-accelerated 3×3 Gaussian blur written in HLS C++. Streams one pixel per cycle (II=1) on an AMD Kria SoC, validated against an OpenCV golden model.",
+        "An image blur that runs in hardware instead of software. I wrote a 3×3 Gaussian filter in HLS C++ for an AMD Kria board — it processes one pixel every clock cycle and matches OpenCV's output pixel-for-pixel.",
       techStack: ["C++", "Vivado HLS", "AMD Kria", "AXI", "OpenCV"],
       link: "",
       github: "https://github.com/JorYin/599-Gaussian-Filter",
@@ -143,7 +143,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Airbnb Price Prediction Model",
       description:
-        "ML pipeline predicting listing prices across 76K+ records (R² = 0.71). Random Forest plus a lot of feature engineering on messy data.",
+        "A dive into messy real-world data: predicting nightly prices for 76,000+ Airbnb listings. The modeling was honestly the easy part — most of the work was cleaning and feature-engineering the dataset until a Random Forest could do something useful with it.",
       techStack: [
         "Python",
         "scikit-learn",
@@ -159,7 +159,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "URL Shortener",
       description:
-        "URL shortener with custom aliases and click analytics, built on Next.js and MongoDB.",
+        "A small link shortener with custom aliases and click analytics. I built it mostly to get comfortable with Next.js API routes and MongoDB, and it ended up being genuinely handy.",
       techStack: ["Next.js", "Tailwind", "MongoDB", "TypeScript", "Vercel"],
       link: "",
       github: "https://github.com/blankwatermelon/url-shortener",
@@ -168,7 +168,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Latent Semantic Analysis (LSA) Search Engine",
       description:
-        "Search engine built on latent semantic analysis. Reduces dimensionality to cut through noise, then ranks results by cosine similarity.",
+        "A search engine that matches on meaning rather than exact keywords. It uses latent semantic analysis to compress noisy term data into concepts, then ranks documents by cosine similarity — so a search for \"car\" can still surface pages about automobiles.",
       techStack: ["Python", "Flask", "scikit-learn"],
       link: "https://youtu.be/NsGPjbT_1DE",
       github: "https://github.com/blankwatermelon/lsa-search-engine",
@@ -177,7 +177,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Multi-threaded Image Processing Server",
       description:
-        "Thread-safe C server for concurrent image processing. Uses worker pools and synchronization to handle multiple client requests.",
+        "A C server that handles image processing for many clients at once. Worker thread pools, semaphores, and careful synchronization — a hands-on tour of everything that makes POSIX concurrency fun and occasionally painful.",
       techStack: ["C", "POSIX Threads", "Sockets", "Semaphores"],
       link: "",
       github: "",
@@ -186,7 +186,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Microbial Abundance Prediction",
       description:
-        "Predicts microbial abundance from pH (R² = 0.63). XGBoost with hyperparameter tuning.",
+        "Research-flavored ML: predicting how abundant soil microbes are from pH readings. I tuned XGBoost models on a small, noisy dataset and learned just how stingy biology data can be.",
       techStack: [
         "Python",
         "scikit-learn",

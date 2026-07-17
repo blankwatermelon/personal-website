@@ -52,7 +52,7 @@ export const HeroSection = React.memo(function HeroSection() {
             </h2>
 
             <p
-              className="blur-up text-lg text-slate-400 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 text-left font-light"
+              className="blur-up text-lg text-slate-300 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 text-left font-normal"
               style={{ animationDelay: "260ms" }}
             >
               {portfolioData.about}

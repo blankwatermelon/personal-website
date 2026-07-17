@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { Project } from "@/data/portfolio";
 import { TbBrandGithub, TbExternalLink } from "react-icons/tb";
@@ -57,10 +57,24 @@ export const ProjectCard = React.memo(function ProjectCard({
   const liveLabel =
     project.link && isYouTube(project.link) ? "Demo Video" : "Live Demo";
 
+  const [expanded, setExpanded] = useState(false);
+  const [isClamped, setIsClamped] = useState(false);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+
+  // Only offer "more" when the collapsed description actually overflows
+  // its 3-line clamp; short blurbs stay static.
+  useEffect(() => {
+    const el = descriptionRef.current;
+    if (el) setIsClamped(el.scrollHeight > el.clientHeight);
+  }, []);
+
+  const canExpand = isClamped || expanded;
+
   return (
     <div
-      className="reveal-up group flex flex-col h-full"
+      className={`reveal-up group flex flex-col h-full ${canExpand ? "cursor-pointer" : ""}`}
       style={{ animationDelay: `${index * 80}ms` }}
+      onClick={canExpand ? () => setExpanded((v) => !v) : undefined}
     >
       {/* Image Container: Border-less, slightly rounded, scale + grayscale hover */}
       <div className="relative aspect-video w-full overflow-hidden flex-shrink-0 rounded-lg grayscale-[0.4] group-hover:grayscale-0 transition-all duration-700">
@@ -98,15 +112,33 @@ export const ProjectCard = React.memo(function ProjectCard({
           {project.title}
         </h3>
         
-        <p className="text-slate-400 text-sm mb-6 line-clamp-3 font-light leading-relaxed">
+        <p
+          ref={descriptionRef}
+          className={`text-slate-300 text-sm font-normal leading-relaxed ${expanded ? "" : "line-clamp-3"}`}
+        >
           {project.description}
         </p>
-        
-        <div className="flex items-center gap-6 mt-auto">
+
+        {canExpand && (
+          <button
+            type="button"
+            aria-expanded={expanded}
+            onClick={(e) => {
+              e.stopPropagation();
+              setExpanded((v) => !v);
+            }}
+            className="self-start mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-slate-300 transition-colors"
+          >
+            {expanded ? "Less ↑" : "More ↓"}
+          </button>
+        )}
+
+        <div className="flex items-center gap-6 mt-auto pt-6">
           {project.github && (
             <Link
               href={project.github}
               target="_blank"
+              onClick={(e) => e.stopPropagation()}
               className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-colors"
             >
               <TbBrandGithub size={18} /> Code
@@ -116,6 +148,7 @@ export const ProjectCard = React.memo(function ProjectCard({
             <Link
               href={project.link}
               target="_blank"
+              onClick={(e) => e.stopPropagation()}
               className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary hover:text-primary/80 transition-colors"
             >
               <TbExternalLink size={18} /> {liveLabel}

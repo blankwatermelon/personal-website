@@ -71,7 +71,7 @@ export const ExperienceSection = React.memo(function ExperienceSection() {
               </div>
             </div>
 
-            <ul className="space-y-4 text-slate-400 font-light leading-relaxed">
+            <ul className="space-y-4 text-slate-300 font-normal leading-relaxed">
               {exp.description.map((desc, i) => (
                 <li key={i} className="flex gap-3">
                   <span className="text-primary mt-1.5 shrink-0 w-1 h-1 rounded-full bg-primary" />
@@ -126,7 +126,7 @@ export const ExperienceSection = React.memo(function ExperienceSection() {
                 </div>
               </div>
 
-              <ul className="space-y-4 text-slate-400 font-light leading-relaxed">
+              <ul className="space-y-4 text-slate-300 font-normal leading-relaxed">
                 {edu.details.map((detail, i) => (
                   <li key={i} className="flex gap-3">
                     <span className="text-primary mt-1.5 shrink-0 w-1 h-1 rounded-full bg-primary" />

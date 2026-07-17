@@ -30,7 +30,7 @@ const SkillGroup = React.memo(function SkillGroup({
           {skills.map((skill, idx) => (
             <span
               key={idx}
-              className="text-lg md:text-xl font-light text-slate-400 group-hover:text-slate-200 transition-colors duration-300 hover:!text-primary cursor-default"
+              className="text-lg md:text-xl font-normal text-slate-400 group-hover:text-slate-200 transition-colors duration-300 hover:!text-primary cursor-default"
               style={{ fontFamily: 'var(--font-space-grotesk), sans-serif' }}
             >
               {skill}
