@@ -330,6 +330,16 @@ html.boot-active .blur-up {
   }
 }
 
+/* Lightbox overlay entrance — used by the project gallery modal. */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Custom Scrollbar - Webkit (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
   width: 10px;

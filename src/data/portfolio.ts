@@ -25,6 +25,11 @@ export interface Education {
   details: string[];
 }
 
+export interface GalleryImage {
+  src: string;
+  caption: string;
+}
+
 export interface Project {
   title: string;
   description: string;
@@ -32,6 +37,7 @@ export interface Project {
   link?: string;
   github?: string;
   thumbnail: string;
+  gallery?: GalleryImage[];
 }
 
 export interface PortfolioData {
@@ -127,8 +133,8 @@ export const portfolioData: PortfolioData = {
         "Google Maps API",
         "Vercel",
       ],
-      link: "",
-      github: "https://github.com/blankwatermelon/bu-transit-tracker",
+      link: "https://391-final-project-jet.vercel.app/",
+      github: "",
       thumbnail: "/images/projects/transit-tracker.png",
     },
     {
@@ -137,8 +143,20 @@ export const portfolioData: PortfolioData = {
         "An image blur that runs in hardware instead of software. I wrote a 3×3 Gaussian filter in HLS C++ for an AMD Kria board — it processes one pixel every clock cycle and matches OpenCV's output pixel-for-pixel.",
       techStack: ["C++", "Vivado HLS", "AMD Kria", "AXI", "OpenCV"],
       link: "",
-      github: "https://github.com/JorYin/599-Gaussian-Filter",
+      github: "",
       thumbnail: "/images/projects/fpga-gaussian.png",
+      gallery: [
+        {
+          src: "/images/projects/fpga-arch.png",
+          caption:
+            "System architecture — a four-stage streaming pipeline on the Kria FPGA fabric, with the ARM CPU as host over AXI-Lite.",
+        },
+        {
+          src: "/images/projects/fpga-metrics.png",
+          caption:
+            "HLS optimization across five design iterations — streaming line buffers and pragma cleanup cut latency 2× and FF usage ~88%.",
+        },
+      ],
     },
     {
       title: "Airbnb Price Prediction Model",
